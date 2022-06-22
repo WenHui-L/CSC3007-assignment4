@@ -44,7 +44,7 @@
             .style("background-color", "#E9E4D4")
             .style('padding', '10px')
             .style("position", "absolute")
-            .style("width" , "150px")
+            .style("width", "200px")
             .selectAll('tr')
             .data(col_value)
             .enter()
@@ -89,7 +89,29 @@
                 .attr("stroke", "black");
             console.log(data_connect)
             console.log(links)
+            
+            svg.append("defs").append("pattern")
+            .attr('id','male_pattern')
+            .attr("width", 20)
+            .attr("height", 20)
+            .append("svg:image")
+            .attr("xlink:href", 'svg/male-svgrepo-com.svg')
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("x", 0)
+            .attr("y", 0)
 
+
+            svg.append("defs").append("pattern")
+            .attr('id','female_pattern')
+            .attr("width", 20)
+            .attr("height", 20)
+            .append("svg:image")
+            .attr("xlink:href", 'svg/female-svgrepo-com.svg')
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("x", 0)
+            .attr("y", 0)
 
             let node = svg.append("g")
                 .attr("id", "nodes")
@@ -98,26 +120,37 @@
                 .enter()
                 .append("circle")
                 .attr("class", "select_circle")
-                .attr("r", 8)
-                .attr("fill", function (d) {
+                .attr("r", 8)               
+                .style("stroke" ,function (d) {
                     return colorScale(d.gender)
                 })
+                .attr('fill',function (d) {
+                    if(d.gender == 'male'){
+                        return 'url(#male_pattern)'
+                    }else{
+                       return 'url(#female_pattern)'
+                    }
+                })
+                
+
+
                 .on("mouseover", (event, d) => {
-                    let form_data = [d.id , d.age, d.gender , d.nationality, d.occupation, d.organization, d.date, d.serology, d.vaccinated];         
-                 
+                    let form_data = [d.id, d.age, d.gender, d.nationality, d.occupation, d.organization, d.date, d.serology, d.vaccinated];
+
                     tooltip.append('td')
-                    .data(form_data)           
-                    .text((d) => {
-                        return d
-                    });
+                        .data(form_data)
+                        .text((d) => {
+                            return d
+                        });
                     d3.select(event.currentTarget).classed("selected", true);
                 })
 
-                .on("mouseout", (event, d) => {  
+                .on("mouseout", (event, d) => {
                     d3.select(event.currentTarget).attr("stroke", "none");
                     d3.select(event.currentTarget).classed("selected", false);
                     tooltip.select('td').remove()
                 })
+
 
 
             let simulation = d3.forceSimulation()

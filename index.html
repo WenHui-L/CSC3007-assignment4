@@ -89,25 +89,25 @@
                 .attr("stroke", "black");
             console.log(data_connect)
             console.log(links)
-            
+
             svg.append("defs").append("pattern")
-            .attr('id','male_pattern')
-            .attr("width", 20)
-            .attr("height", 20)
-            .append("svg:image")
-            .attr("xlink:href", 'svg/male-svgrepo-com.svg')
-            .attr("width", 15)
-            .attr("height", 15)
+                .attr('id', 'male_pattern')
+                .attr("width", 20)
+                .attr("height", 20)
+                .append("svg:image")
+                .attr("xlink:href", 'svg/male-svgrepo-com.svg')
+                .attr("width", 15)
+                .attr("height", 15)
 
 
             svg.append("defs").append("pattern")
-            .attr('id','female_pattern')
-            .attr("width", 20)
-            .attr("height", 20)
-            .append("svg:image")
-            .attr("xlink:href", 'svg/female-svgrepo-com.svg')
-            .attr("width", 15)
-            .attr("height", 15)
+                .attr('id', 'female_pattern')
+                .attr("width", 20)
+                .attr("height", 20)
+                .append("svg:image")
+                .attr("xlink:href", 'svg/female-svgrepo-com.svg')
+                .attr("width", 15)
+                .attr("height", 15)
 
 
             let node = svg.append("g")
@@ -117,18 +117,18 @@
                 .enter()
                 .append("circle")
                 .attr("class", "select_circle")
-                .attr("r", 8)               
-                .style("stroke" ,function (d) {
+                .attr("r", 8)
+                .style("stroke", function (d) {
                     return colorScale(d.gender)
                 })
-                .attr('fill',function (d) {
-                    if(d.gender == 'male'){
+                .attr('fill', function (d) {
+                    if (d.gender == 'male') {
                         return 'url(#male_pattern)'
-                    }else{
-                       return 'url(#female_pattern)'
+                    } else {
+                        return 'url(#female_pattern)'
                     }
                 })
-                
+
 
 
                 .on("mouseover", (event, d) => {

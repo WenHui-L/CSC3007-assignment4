@@ -54,7 +54,7 @@
                 return d;
             });
 
-        Promise.all([d3.json("https://chi-loong.github.io/CSC3007/assignments/links-sample.json"), d3.json("https://chi-loong.github.io/CSC3007/assignments/cases-sample.json")]).then(data => {
+        Promise.all([d3.json("json/links-sample.json"), d3.json("json/cases-sample.json")]).then(data => {
 
             let data_connect = [];
 
